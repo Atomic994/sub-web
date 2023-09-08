@@ -262,7 +262,7 @@ const remoteConfigSample = process.env.VUE_APP_SUBCONVERTER_REMOTE_CONFIG
 const gayhubRelease = process.env.VUE_APP_BACKEND_RELEASE
 const defaultBackend = process.env.VUE_APP_SUBCONVERTER_DEFAULT_BACKEND + '/sub?'
 const shortUrlBackend = process.env.VUE_APP_MYURLS_DEFAULT_BACKEND + '/short'
-const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/config/upload'
+const configUploadBackend = process.env.VUE_APP_CONFIG_UPLOAD_BACKEND + '/sub.php'
 const tgBotLink = process.env.VUE_APP_BOT_LINK
 
 export default {
@@ -703,13 +703,13 @@ export default {
           }
         })
         .then(res => {
-          if (res.data.code === 0 && res.data.data.url !== "") {
+          if (res.data.code === 0 && res.data.data !== "") {
             this.$message.success(
-              "远程配置上传成功，配置链接已复制到剪贴板，有效期三个月望知悉"
+              "远程配置上传成功，配置链接已复制到剪贴板"
             );
 
             // 自动填充至『表单-远程配置』
-            this.form.remoteConfig = res.data.data.url;
+            this.form.remoteConfig = res.data.data;
             this.$copyText(this.form.remoteConfig);
 
             this.dialogUploadConfigVisible = false;
